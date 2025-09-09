@@ -11,9 +11,6 @@ const {
   GetObjectCommand,
 } = require("@aws-sdk/client-s3");
 
-//const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
-
-//create a random file name for the image to be uploaded
 const generateFileName = (bytes = 32) =>
   crypto.randomBytes(bytes).toString("hex");
 require("dotenv").config();
