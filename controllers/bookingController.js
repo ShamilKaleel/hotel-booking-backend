@@ -69,4 +69,25 @@ const deleteBooking = async (req, res) => {
   }
 };
 
-module.exports = { addBooking, getBookings, deleteBooking };
+const getBookingsByPlace = async (req, res) => {
+  const placeId = req.params.placeId;
+
+  if (!placeId) {
+    return res.status(400).json({ error: "Place ID is required" });
+  }
+
+  try {
+    const bookings = await Booking.find({ place: placeId });
+
+    if (!bookings.length) {
+      return res.status(404).json({ error: "No bookings found for this place" });
+    }
+
+    res.status(200).json(bookings);
+  } catch (err) {
+    console.log(err.message);
+    res.status(400).json({ error: err.message });
+  }
+};
+
+module.exports = { addBooking, getBookings, deleteBooking, getBookingsByPlace };

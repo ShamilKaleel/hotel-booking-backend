@@ -65,6 +65,28 @@ const profile = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  res.clearCookie("token").json(true).status(200);
+  try {
+    const userId = req.userId; // Available from authMiddleware
+    
+    res
+      .status(200)
+      .clearCookie("token", {
+        httpOnly: true,
+        secure: true, // Must match login cookie settings
+        sameSite: "None",
+      })
+      .json({ 
+        message: "Logged out successfully",
+        success: true 
+      });
+      
+    console.log(`User ${userId} logged out successfully at ${new Date().toISOString()}`);
+  } catch (error) {
+    console.error("Logout error:", error);
+    res.status(500).json({ 
+      message: "Error during logout", 
+      success: false 
+    });
+  }
 };
 module.exports = { register, login, profile, logout };
