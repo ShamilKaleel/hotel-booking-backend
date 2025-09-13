@@ -26,6 +26,16 @@ app.use(
   })
 );
 
+// Base URL health check endpoint
+app.get("/", (req, res) => {
+  res.json({ message: "Hi!", status: "Server is running", timestamp: new Date().toISOString() });
+});
+
+// API health check endpoint
+app.get("/api", (req, res) => {
+  res.json({ message: "Hi!", status: "API is working", timestamp: new Date().toISOString() });
+});
+
 app.use("/api", UserRoute);
 app.use("/api", PlaceRoute);
 app.use("/api", BookingRoute);
