@@ -21,7 +21,7 @@ app.use(
   cors({
     credentials: true,
     // origin: "https://stay-ease-theta.vercel.app",
-    origin: "http://localhost:5173",
+    origin: "*",
   })
 );
 
