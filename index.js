@@ -21,7 +21,7 @@ app.use(
   cors({
     credentials: true,
     // origin: "https://stay-ease-theta.vercel.app",
-    origin: "https://hotel-booking-frontend-pi.vercel.app",
+    origin: process.env.ALL_CORS_ORIGINS,
 
   })
 );
